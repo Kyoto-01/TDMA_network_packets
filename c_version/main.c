@@ -17,7 +17,7 @@ Link* get_links_infos(int num_links, char* slots, float* loss_rates, int slotfra
     // individual da rede
 
     Link* links_infos = (Link*)malloc(num_links * sizeof(Link));
-    memset(links_infos, 0, sizeof(links_infos[0]));
+    memset(links_infos, 0, num_links * sizeof(links_infos[0]));
 
     for (int i = 0; i < strlen(slots); i++){
         int endnode = slots[i] - '0';
