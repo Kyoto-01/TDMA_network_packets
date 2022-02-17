@@ -6,12 +6,12 @@
 
 typedef struct {
 
-    int packets_per_second;
+    float packets_per_second;
     float packet_loss;
 
 } Link;
 
-Link* get_links_infos(int num_links, char* slots, float* loss_rates, int slotframes_per_second){
+Link* get_links_infos(int num_links, char* slots, float* loss_rates, float slotframes_per_second){
 
     // retorna a quantidade de pacotes enviados e perdidos pra cada enlace
     // individual da rede
@@ -39,7 +39,7 @@ float* get_sorvedouro_links_packets_per_second(int num_links, Link* links_infos)
     float* sorvedouro_packets_per_second = (float*)malloc(num_links * sizeof(Link));
     
     for (int i = 0; i < num_links; i++){
-        sorvedouro_packets_per_second[i] = links_infos[i].packets_per_second - links_infos[i].packet_loss; 
+        sorvedouro_packets_per_second[i] = links_infos[i].packets_per_second - links_infos[i].packet_loss;
     }
 
     return sorvedouro_packets_per_second;
@@ -71,6 +71,11 @@ int main(){
     float slotframes_per_second = 1000 / slotframe_duration;
 
     Link* links_infos = get_links_infos(num_endnodes, slot_nodes, loss_rates, slotframes_per_second);
+    
+    for (int i = 0; i < num_endnodes; i++){
+        printf("(%d, %f) - ", links_infos[i].packets_per_second, links_infos[i].packet_loss);
+    }
+    
     float* sorvedouro_links_packets_per_second = get_sorvedouro_links_packets_per_second(num_endnodes, links_infos);
 
     // Saída
