@@ -71,11 +71,6 @@ int main(){
     float slotframes_per_second = 1000 / slotframe_duration;
 
     Link* links_infos = get_links_infos(num_endnodes, slot_nodes, loss_rates, slotframes_per_second);
-    
-    for (int i = 0; i < num_endnodes; i++){
-        printf("(%d, %f) - ", links_infos[i].packets_per_second, links_infos[i].packet_loss);
-    }
-    
     float* sorvedouro_links_packets_per_second = get_sorvedouro_links_packets_per_second(num_endnodes, links_infos);
 
     // Saída
